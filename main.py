@@ -9,22 +9,32 @@ API_URL = os.getenv('API_URL')
 
 canvas = Canvas(API_URL,API_KEY)
 
-courses = canvas.get_courses()
+course = canvas.get_course(144)
 
-listofusers = []
+enrollments = course.get_enrollments(user_id=216, type=["StudentEnrollment"])
+my_enrollment = enrollments[0]
 
-for course in courses:
-    print(f"{course.name}: {course.id}")
-    for user in course.get_users(enrollment_type=['student']):
-        listofusers.append(user.id)
-        # print(f"{user.name}: {user.id}")
+print(my_enrollment.grades['current_score'])
+print(my_enrollment.grades['current_grade'])
 
 
-newlist = list(set(listofusers))
 
-newlist.sort()
 
-print(newlist)
+# courses = canvas.get_courses()
+
+# listofusers = []
+
+# for course in courses:
+#     print(f"{course.name}: {course.id}")
+#     for user in course.get_users(enrollment_type=['student']):
+#         listofusers.append(user.id)
+
+
+# newlist = list(set(listofusers))
+
+# newlist.sort()
+
+# print(newlist)
 
 
 
