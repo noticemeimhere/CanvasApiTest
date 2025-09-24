@@ -22,7 +22,7 @@ courses = canvas.get_courses()
 listofusers = []
 
 for course in courses:
-    print(f"{course.name}: {course.id}")
+    print(f"{course.name}: {course.id} \n")
     for user in course.get_users(enrollment_type=['student']):
         print(f"{user.name}: {user.id}")
         listofusers.append(user.id)
