@@ -22,16 +22,22 @@ courses = canvas.get_courses()
 listofusers = []
 
 for course in courses:
-    print(f"{course.name}: {course.id} \n")
-    for user in course.get_users(enrollment_type=['student']):
-        print(f"{user.name}: {user.id}")
-        listofusers.append(user.id)
-    enrollments = course.get_enrollments(user_id=216, type=["StudentEnrollment"])
-    my_enrollment = enrollments[0]
 
-    print(f"Grade: {my_enrollment.grades['current_score']}%")
-    print(my_enrollment.grades['current_grade'])
+    if course.id == 354:
+        pass
+    else:
 
+        print(f"\n{course.name}: {course.id}")
+        
+        enrollments = course.get_enrollments(user_id=216, type=["StudentEnrollment"])
+        my_enrollment = enrollments[0]
+
+        print(f"Grade: {my_enrollment.grades['current_score']}%")
+        gpa = my_enrollment.grades['current_score']
+
+        if gpa >= 93.0:
+            print("GPA: 4.0")
+    
 
 newlist = list(set(listofusers))
 
@@ -39,13 +45,6 @@ newlist.sort()
 
 print(newlist)
 
-
-
-# course = canvas.get_course(354)
-
 # for user in course.get_users(enrollment_type=['student']):
-#     print(f"{user.name}: {user.id}")
-
-# tester = canvas.get_user(1)
-
-# print(user.name)
+#         print(f"{user.name}: {user.id}")
+#         listofusers.append(user.id)
