@@ -14,37 +14,33 @@ course = canvas.get_course(144)
 enrollments = course.get_enrollments(user_id=216, type=["StudentEnrollment"])
 my_enrollment = enrollments[0]
 
-print(my_enrollment.grades['current_score'])
-print(my_enrollment.grades['current_grade'])
-
 courses = canvas.get_courses()
-
-listofusers = []
+user = course.get_users
 
 for course in courses:
+    users = course.get_users()
+    for user in users:
+        print(user)
 
-    if course.id == 354:
+
+#returns a gpa score from a grade
+def get_gpa_from_grade(grade):
+    if grade >= 93:
+        gpa = 4.0
+    elif grade >= 90:
+        gpa = 3.7
+    return gpa
+
+for course in courses:
+    
+    enrollments = course.get_enrollments(user_id=216, type=["StudentEnrollment"])
+    my_enrollment = enrollments[0]
+    grade = my_enrollment.grades['current_score']
+
+    if grade == None:
         pass
     else:
-
         print(f"\n{course.name}: {course.id}")
-        
-        enrollments = course.get_enrollments(user_id=216, type=["StudentEnrollment"])
-        my_enrollment = enrollments[0]
-
         print(f"Grade: {my_enrollment.grades['current_score']}%")
-        gpa = my_enrollment.grades['current_score']
-
-        if gpa >= 93.0:
-            print("GPA: 4.0")
-    
-
-newlist = list(set(listofusers))
-
-newlist.sort()
-
-print(newlist)
-
-# for user in course.get_users(enrollment_type=['student']):
-#         print(f"{user.name}: {user.id}")
-#         listofusers.append(user.id)
+        print(get_gpa_from_grade(grade))
+        
